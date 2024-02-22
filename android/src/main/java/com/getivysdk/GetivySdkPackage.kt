@@ -8,10 +8,10 @@ import com.facebook.react.uimanager.ViewManager
 
 class GetivySdkPackage : ReactPackage {
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-    return emptyList()
+    return listOf(GetivySdkModule(reactContext))
   }
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-    return listOf(GetivySdkViewManager())
+    return emptyList()
   }
 }

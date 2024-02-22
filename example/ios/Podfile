@@ -26,7 +26,8 @@ if linkage != nil
 end
 
 target 'GetivySdkExample' do
-  pod 'GetivySDK', path: '../../../ios-sdk'
+  # pod 'GetivySDK', path: '../../../ios-sdk' # To test with local sdk copy link to the local SDK folder instead
+  pod 'GetivySDK' # To test with production sdk uncomment this line
   use_frameworks! :linkage => :static
   config = use_native_modules!
 

@@ -1,8 +1,19 @@
 import GetivySDK;
 import React
 
-@objc(GetivySDKManager)
-class GetivySDKManager: RCTEventEmitter {
+@objc(GetivySdk)
+class GetivySdk: RCTEventEmitter {
+
+  func convertEnvToNumber(env: String) -> Environment? {
+      switch env.lowercased() {
+      case "sandbox":
+          return .sandbox
+      case "production":
+          return .production
+      default:
+          return nil
+      }
+  }
 
   var sdkHandler: UIHandler? = nil
 
@@ -19,9 +30,9 @@ class GetivySDKManager: RCTEventEmitter {
   }
 
   @objc(initializeDataSession:withEnvironment:withResolver:withRejecter:)
-  func initializeDataSession(dataSessionId: String, environment: Int, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func initializeDataSession(dataSessionId: String, environment: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
     sdkHandler = nil
-      guard let env = Environment(rawValue: environment) else {
+      guard let env = convertEnvToNumber(env: environment) else {
           reject(nil, "Wrong environment value", nil);
           return
       }
@@ -44,14 +55,14 @@ class GetivySDKManager: RCTEventEmitter {
   }
 
   @objc(initializeCheckoutSession:withEnvironment:withResolver:withRejecter:)
-  func initializeCheckoutSession(checkoutSessionId: String, environment: Int, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func initializeCheckoutSession(checkoutSessionId: String, environment: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
     sdkHandler = nil
-      guard let env = Environment(rawValue: environment) else {
+      guard let env = convertEnvToNumber(env: environment) else {
           reject(nil, "Wrong environment value", nil);
           return
       }
     let config = GetivyConfiguration(checkoutId: checkoutSessionId, environment: env) { result in
-      let convertedResult = ["referenceId": result.referenceId ?? "", "dataSessionId": result.dataSessionId ?? "", "checkoutSessionId": result.checkoutSessionId ?? ""];
+      let convertedResult = ["referenceId": result.referenceId ?? "", "sessionId": result.dataSessionId ?? result.checkoutSessionId ?? ""];
       self.emitSuccessEvent(withDetails: NSDictionary(dictionary: convertedResult))
     } onError: { error in
       let convertedError = ["code": error?.code ?? "", "message": error?.message ?? ""];

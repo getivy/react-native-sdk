@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import axios from 'axios';
 import Config from 'react-native-config';
-import uuid from 'react-native-uuid';
 
 type ApiServiceParams = {
   isDataSession: boolean;
@@ -32,6 +31,7 @@ const useApiService = () => {
           ...(bankId ? { bankId: bankId } : undefined),
         },
         market: market,
+        locale: 'en',
         permissions: ['identity'],
         referenceId: referenceIdString,
         successCallbackUrl: 'https://example.com/success',
@@ -44,49 +44,13 @@ const useApiService = () => {
           ...(bankId ? { bankId: bankId } : undefined),
         },
         market: market,
-        handshake: false,
-        express: false,
-        guest: true,
-        displayId: 'Test',
         locale: 'en',
-        category: '5045',
         price: {
-          totalNet: 20,
-          vat: 20,
-          shipping: 20,
           total: 60,
           currency: currency,
-          subTotal: 40,
         },
-        lineItems: [
-          {
-            name: 'Test item',
-            referenceId: uuid.v4().toString(),
-            singleNet: 20,
-            singleVat: 20,
-            amount: 120,
-            quantity: 1,
-            category: '5045',
-          },
-        ],
-        billingAddress: {
-          country: 'AU',
-          zipCode: '19238',
-          city: 'London',
-          line1: 'asdf asf asf a',
-        },
-        shippingMethods: [
-          {
-            price: 20,
-            name: 'Shipment',
-            countries: ['AU'],
-          },
-        ],
-        permissions: ['identity', 'transactions'],
+
         referenceId: referenceIdString,
-        successCallbackUrl: 'https://example.com/success',
-        errorCallbackUrl: 'https://example.com/error',
-        resultCallbackUrl: 'https://example.com/result',
       };
 
       try {

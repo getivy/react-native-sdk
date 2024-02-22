@@ -18,19 +18,6 @@ import {
 } from 'react-native-getivy-sdk';
 import useApiService from './hooks/useApiService';
 
-const convertEvnToNumber = (env: string) => {
-  switch (env) {
-    case 'Development':
-      return 2;
-    case 'Sandbox':
-      return 1;
-    case 'Production':
-      return 0;
-    default:
-      throw new Error('Invalid environment');
-  }
-};
-
 export default function App() {
   const { postRequest } = useApiService();
   const bankId = 'de-tinktestsuccess';
@@ -99,11 +86,10 @@ export default function App() {
       Alert.alert('Error:', JSON.stringify(reponse.error));
     } else if (reponse.id) {
       try {
-        const env = convertEvnToNumber(environment);
         if (dataCheckout) {
-          initializeDataSession(reponse.id, env);
+          initializeDataSession(reponse.id, environment);
         } else {
-          initializeCheckoutSession(reponse.id, env);
+          initializeCheckoutSession(reponse.id, environment);
         }
       } catch (e) {
         Alert.alert('Error:', JSON.stringify(e));

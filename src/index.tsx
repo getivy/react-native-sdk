@@ -6,8 +6,8 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const GetivySDKManager = NativeModules.GetivySDKManager
-  ? NativeModules.GetivySDKManager
+const GetivySDKManager = NativeModules.GetivySdk
+  ? NativeModules.GetivySdk
   : new Proxy(
       {},
       {
@@ -19,23 +19,21 @@ const GetivySDKManager = NativeModules.GetivySDKManager
 
 export const initializeDataSession = (
   dataSessionId: string,
-  environment: number
-): Promise<boolean> => {
+  environment: string
+): Promise<void> => {
   if (!GetivySDKManager.initializeDataSession) {
     throw new Error(LINKING_ERROR);
   }
-  console.log('initializeDataSession', dataSessionId, environment);
   return GetivySDKManager.initializeDataSession(dataSessionId, environment);
 };
 
 export const initializeCheckoutSession = (
   checkoutSessionId: string,
-  environment: number
-): Promise<boolean> => {
+  environment: string
+): Promise<void> => {
   if (!GetivySDKManager.initializeCheckoutSession) {
     throw new Error(LINKING_ERROR);
   }
-  console.log('initializeCheckoutSession', checkoutSessionId, environment);
   return GetivySDKManager.initializeCheckoutSession(
     checkoutSessionId,
     environment

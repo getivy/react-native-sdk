@@ -891,7 +891,7 @@ PODS:
     - react-native-config/App (= 1.5.1)
   - react-native-config/App (1.5.1):
     - React-Core
-  - react-native-getivy-sdk (0.1.0):
+  - react-native-getivy-sdk (1.0.0):
     - GetivySDK
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1275,7 +1275,7 @@ SPEC CHECKSUMS:
   React-logger: 0a57b68dd2aec7ff738195f081f0520724b35dab
   React-Mapbuffer: 114be72666d7e3e317c1a36fb566cd3ad712fcc8
   react-native-config: 86038147314e2e6d10ea9972022aa171e6b1d4d8
-  react-native-getivy-sdk: 304c24d2205d11fbe91b7dee31c25361b555c043
+  react-native-getivy-sdk: 7464d9a78fe2b3db553069a33fa06ca3f2e8450e
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   React-nativeconfig: ca8b90c736cf3be019cb332ca42d93dd95b32e05
   React-NativeModulesApple: 1fdffcce7772e274baeab33a1900f45feba86cbd
