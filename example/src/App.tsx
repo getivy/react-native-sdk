@@ -15,7 +15,7 @@ import {
   openSDK,
   initializeDataSession,
   eventsEmitter,
-} from 'react-native-getivy-sdk';
+} from '@getivy/react-native-getivy-sdk';
 import useApiService from './hooks/useApiService';
 
 export default function App() {

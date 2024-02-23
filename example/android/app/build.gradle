@@ -107,7 +107,7 @@ android {
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
-    implementation 'io.getivy:sdk:1.0.1'
+    implementation 'io.getivy:sdk:2.0.0'
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
 

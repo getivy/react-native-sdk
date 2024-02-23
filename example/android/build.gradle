@@ -24,8 +24,8 @@ allprojects {
             name = "GitHub"
             url = uri("https://maven.pkg.github.com/getivy/android-sdk-public")
             credentials {
-                username = "mariuskurgonasativy"
-                password = "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"
+                username = System.getenv("GETIVY_GITHUB_USER")
+                password = System.getenv("GETIVY_GITHUB_TOKEN")
             }
         }
     }
