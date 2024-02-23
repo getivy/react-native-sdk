@@ -50,7 +50,7 @@ class GetivySdkModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun openSDK() {
-    this?.handler?.open {
+    handler?.open {
 
       when (it) {
         is Handler.Result.Success -> {
