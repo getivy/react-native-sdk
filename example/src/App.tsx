@@ -19,6 +19,11 @@ import {
 import useApiService from './hooks/useApiService';
 
 export default function App() {
+  useEffect(() => {
+    restart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const { postRequest } = useApiService();
   const bankId = 'de-tinktestsuccess';
 
