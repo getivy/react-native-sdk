@@ -46,7 +46,7 @@ const useApiService = () => {
         market: market,
         locale: 'en',
         price: {
-          total: 60,
+          total: 1,
           currency: currency,
         },
 
