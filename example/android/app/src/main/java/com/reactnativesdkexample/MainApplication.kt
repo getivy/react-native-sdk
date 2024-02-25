@@ -1,4 +1,4 @@
-package com.getivysdkexample
+package com.reactnativesdkexample
 
 import android.app.Application
 import com.facebook.react.PackageList

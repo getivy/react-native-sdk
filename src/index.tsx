@@ -6,8 +6,8 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const GetivySDKManager = NativeModules.GetivySdk
-  ? NativeModules.GetivySdk
+const GetivySDK = NativeModules.ReactNativeSdk
+  ? NativeModules.ReactNativeSdk
   : new Proxy(
       {},
       {
@@ -21,30 +21,27 @@ export const initializeDataSession = (
   dataSessionId: string,
   environment: string
 ): Promise<void> => {
-  if (!GetivySDKManager.initializeDataSession) {
+  if (!GetivySDK.initializeDataSession) {
     throw new Error(LINKING_ERROR);
   }
-  return GetivySDKManager.initializeDataSession(dataSessionId, environment);
+  return GetivySDK.initializeDataSession(dataSessionId, environment);
 };
 
 export const initializeCheckoutSession = (
   checkoutSessionId: string,
   environment: string
 ): Promise<void> => {
-  if (!GetivySDKManager.initializeCheckoutSession) {
+  if (!GetivySDK.initializeCheckoutSession) {
     throw new Error(LINKING_ERROR);
   }
-  return GetivySDKManager.initializeCheckoutSession(
-    checkoutSessionId,
-    environment
-  );
+  return GetivySDK.initializeCheckoutSession(checkoutSessionId, environment);
 };
 
 export const openSDK = () => {
-  if (!GetivySDKManager.openSDK) {
+  if (!GetivySDK.openSDK) {
     throw new Error(LINKING_ERROR);
   }
-  GetivySDKManager.openSDK();
+  GetivySDK.openSDK();
 };
 
-export const eventsEmitter = GetivySDKManager;
+export const eventsEmitter = GetivySDK;

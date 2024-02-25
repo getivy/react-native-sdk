@@ -1,8 +1,8 @@
 import GetivySDK;
 import React
 
-@objc(GetivySdk)
-class GetivySdk: RCTEventEmitter {
+@objc(ReactNativeSdk)
+class ReactNativeSdk: RCTEventEmitter {
 
   var sdkHandler: UIHandler? = nil
 
@@ -29,7 +29,7 @@ class GetivySdk: RCTEventEmitter {
       self.emitErrorEvent(withError: NSDictionary(dictionary: convertedError))
     }
     
-    GetivySDK.shared.initializeHandler(configuration: config, type: SDKFlowType.data) { handler, error in
+    Getivy.shared.initializeHandler(configuration: config, type: SDKFlowType.data) { handler, error in
         if let error = error {
             reject(error.code, error.message, nil)
         } else {
@@ -50,7 +50,7 @@ class GetivySdk: RCTEventEmitter {
       self.emitErrorEvent(withError: NSDictionary(dictionary: convertedError))
     }
     
-    GetivySDK.shared.initializeHandler(configuration: config, type: SDKFlowType.checkout) { handler, error in
+    Getivy.shared.initializeHandler(configuration: config, type: SDKFlowType.checkout) { handler, error in
         if let error = error {
             reject(error.code, error.message, nil)
         } else {

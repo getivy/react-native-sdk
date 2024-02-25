@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ScrollView, Button, View, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
@@ -10,12 +10,11 @@ import uuid from 'react-native-uuid';
 
 import { NativeEventEmitter } from 'react-native';
 import {
-  // GetivySdkView,
   initializeCheckoutSession,
   openSDK,
   initializeDataSession,
   eventsEmitter,
-} from '@getivy/react-native-getivy-sdk';
+} from '@getivy/react-native-sdk';
 import useApiService from './hooks/useApiService';
 
 export default function App() {
@@ -27,11 +26,11 @@ export default function App() {
   const { postRequest } = useApiService();
   const bankId = 'de-tinktestsuccess';
 
-  const [environment, setEnvironment] = useState('Sandbox');
-  const [market, setMarket] = useState('DE');
-  const [prefill, setPrefill] = useState(false);
-  const [dataCheckout, setDataCheckout] = useState(false);
-  const [currency, setCurrency] = useState('EUR');
+  const environment = useRef('Sandbox');
+  const market = useRef('DE');
+  const prefill = useRef(false);
+  const dataCheckout = useRef(false);
+  const currency = useRef('EUR');
 
   useEffect(() => {
     const eventEmitter = new NativeEventEmitter(eventsEmitter);
@@ -50,23 +49,28 @@ export default function App() {
   }, []);
 
   const handleEnvironmentChange = (e: string) => {
-    setEnvironment(e);
+    environment.current = e;
+    restart();
   };
 
   const handleMarketChange = (m: string) => {
-    setMarket(m);
+    market.current = m;
+    restart();
   };
 
   const handlePrefillChange = (isEnabled: boolean) => {
-    setPrefill(isEnabled);
+    prefill.current = isEnabled;
+    restart();
   };
 
   const handleDataSessionChange = (isEnabled: boolean) => {
-    setDataCheckout(isEnabled);
+    dataCheckout.current = isEnabled;
+    restart();
   };
 
   const handleCurrencyChange = (c: string) => {
-    setCurrency(c);
+    currency.current = c;
+    restart();
   };
 
   const onRestartPress = () => {
@@ -79,22 +83,22 @@ export default function App() {
 
   const restart = async () => {
     const reponse = await postRequest({
-      isDataSession: dataCheckout,
-      currency,
-      market,
-      bankId: prefill ? bankId : undefined,
+      isDataSession: dataCheckout.current,
+      currency: currency.current,
+      market: market.current,
+      bankId: prefill.current ? bankId : undefined,
       referenceIdString: uuid.v4().toString(),
-      environment,
+      environment: environment.current,
     });
 
     if (reponse.error) {
       Alert.alert('Error:', JSON.stringify(reponse.error));
     } else if (reponse.id) {
       try {
-        if (dataCheckout) {
-          initializeDataSession(reponse.id, environment);
+        if (dataCheckout.current) {
+          initializeDataSession(reponse.id, environment.current);
         } else {
-          initializeCheckoutSession(reponse.id, environment);
+          initializeCheckoutSession(reponse.id, environment.current);
         }
       } catch (e) {
         Alert.alert('Error:', JSON.stringify(e));

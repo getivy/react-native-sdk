@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  GetivySdkExample
+//  ReactNativeSdkExample
 //
 
 import Foundation

@@ -1,6 +1,6 @@
 {
-  "name": "@getivy/react-native-getivy-sdk",
-  "version": "1.0.0",
+  "name": "@getivy/react-native-sdk",
+  "version": "1.0.1",
   "description": "Getivy SDK for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -26,7 +26,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-getivy-sdk-example",
+    "example": "yarn workspace @getivy/react-native-sdk-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -41,14 +41,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/getivy/react-native-sdk.git"
+    "url": "git+https://github.com/mariuskurgonas/getivy-react-native-sdk.git"
   },
-  "author": "Getivy (https://github.com/getivy)",
+  "author": "mariuskurgonas <kurgonasmarius@gmail.com> (https://github.com/mariuskurgonas)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/getivy/react-native-sdk/issues"
+    "url": "https://github.com/mariuskurgonas/getivy-react-native-sdk/issues"
   },
-  "homepage": "https://getivy.de",
+  "homepage": "https://github.com/mariuskurgonas/getivy-react-native-sdk#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

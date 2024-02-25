@@ -22,6 +22,7 @@ const CurrencyPicker: React.FC<CurrencyPickerProps> = ({
   return (
     <PickerContainer>
       <Picker
+        // eslint-disable-next-line react-native/no-inline-styles
         style={{ width: 200 }}
         selectedValue={selectedCurrency}
         onValueChange={(itemValue) => handleCurrencyChange(itemValue)}

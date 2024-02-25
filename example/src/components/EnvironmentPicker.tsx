@@ -22,6 +22,7 @@ const EnvironmentPicker: React.FC<EnvironmentPickerProps> = ({
   return (
     <PickerContainer>
       <Picker
+        // eslint-disable-next-line react-native/no-inline-styles
         style={{ width: 200 }}
         selectedValue={selectedEnvironment}
         onValueChange={(itemValue) => handleEnvironmentChange(itemValue)}

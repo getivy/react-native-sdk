@@ -58,6 +58,10 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Set environment variable for the build
+        run: |
+          echo "GETIVY_GITHUB_USER=${{ secrets.GETIVY_GITHUB_USER }}" >> $GITHUB_ENV
+          echo "GETIVY_GITHUB_TOKEN=${{ secrets.GETIVY_GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: Cache turborepo for Android
         uses: actions/cache@v3
         with:
@@ -99,7 +103,7 @@ jobs:
 
       - name: Build example for Android
         env:
-          JAVA_OPTS: "-XX:MaxHeapSize=6g"
+          JAVA_OPTS: '-XX:MaxHeapSize=6g'
         run: |
           yarn turbo run build:android --cache-dir="${{ env.TURBO_CACHE_DIR }}"
 

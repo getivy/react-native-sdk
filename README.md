@@ -1,17 +1,17 @@
-# react-native-getivy-sdk
+# @getivy/react-native-sdk
 
 Getivy SDK for React Native
 
 ## Installation
 
 ```sh
-npm install react-native-getivy-sdk
+npm install @getivy/react-native-sdk
 ```
 
 ## Usage
 
 ```js
-import { multiply } from 'react-native-getivy-sdk';
+import { multiply } from '@getivy/react-native-sdk';
 
 // ...
 

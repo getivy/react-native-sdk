@@ -16,16 +16,16 @@ buildscript {
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
     }
-}
 
-allprojects {
-    repositories {
-        maven {
-            name = "GitHub"
-            url = uri("https://maven.pkg.github.com/getivy/android-sdk-public")
-            credentials {
-                username = System.getenv("GETIVY_GITHUB_USER")
-                password = System.getenv("GETIVY_GITHUB_TOKEN")
+    allprojects {
+        repositories {
+            maven {
+                name = "GitHub"
+                url = uri("https://maven.pkg.github.com/getivy/android-sdk-public")
+                credentials {
+                    username = System.getenv("GETIVY_GITHUB_USER")
+                    password = System.getenv("GETIVY_GITHUB_TOKEN")
+                }
             }
         }
     }

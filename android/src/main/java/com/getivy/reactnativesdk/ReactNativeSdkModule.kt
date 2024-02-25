@@ -1,4 +1,4 @@
-package com.getivysdk
+package com.getivy.reactnativesdk
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
@@ -11,7 +11,7 @@ import io.getivy.sdk.GetivySDK
 import io.getivy.sdk.data.SDKFlowType
 import io.getivy.sdk.handler.Handler
 
-class GetivySdkModule(reactContext: ReactApplicationContext) :
+class ReactNativeSdkModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
 
   private var handler: Handler? = null
@@ -78,6 +78,6 @@ class GetivySdkModule(reactContext: ReactApplicationContext) :
   }
 
   companion object {
-    const val NAME = "GetivySdk"
+    const val NAME = "ReactNativeSdk"
   }
 }
