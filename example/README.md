@@ -1,79 +1,93 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
-
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+- Installation
+- Usage
 
-## Step 1: Start the Metro Server
+## Step 1: Installation
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
-
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+Add the module to your react native project by executing:
 
 ```bash
 # using npm
-npm run android
+npm install @getivy/react-native-sdk
 
 # OR using Yarn
-yarn android
+yarn add @getivy/react-native-sdk
 ```
 
-### For iOS
+Create a personal Github access token with permission _read:packages_ and add the following in your Android application root _build.gradle_ file:
 
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+```
+allprojects {
+        repositories {
+            maven {
+                name = "GitHub"
+                url = uri("https://maven.pkg.github.com/getivy/android-sdk-public")
+                credentials {
+                    username = <Github_username>
+                    password = <Github_token>
+                }
+            }
+        }
+    }
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+Even though the Maven repository is public, Github requires this to be able to get the package.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Step 2: Usage
 
-## Step 3: Modifying your App
+Import the package:
 
-Now that you have successfully run the app, let's modify it.
+```
+import * as GetivySDK from '@getivy/react-native-sdk';
+```
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+Initialize the SDK with data session or checkout session id and environment:
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+```
+// Data session
+GetivySDK.initializeDataSession(dataSessionId, "production");
+```
 
-## Congratulations! :tada:
+```
+// Checkout session
+GetivySDK.initializeCheckoutSession(checkoutSessionId, "sandbox");
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+Possible environment values: _production_ and _sandbox_
 
-### Now what?
+Open SDK UI:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+```
+GetivySDK.openSDK();
+```
 
-# Troubleshooting
+It will open a modal view on top of your application in iOS, and new activity in Android.
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+Listen for SDK events:
 
-# Learn More
+```
+import { NativeEventEmitter } from 'react-native';
 
-To learn more about React Native, take a look at the following resources:
+// Component implementation
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+useEffect(() => {
+    const eventEmitter = new NativeEventEmitter(eventsEmitter);
+    const onSuccess = eventEmitter.addListener('onSuccess', (eventData) => {
+      Alert.alert('Success', JSON.stringify(eventData));
+    });
+
+    const onError = eventEmitter.addListener('onError', (eventData) => {
+      Alert.alert('Error', JSON.stringify(eventData));
+    });
+
+    return () => {
+      onSuccess.remove();
+      onError.remove();
+    };
+  }, []);
+```
+
+While going through SDK, closing, succeeding to pay or failing, events will be delivered by the listeners.
+
+Refer to the _example_ application for more indepth usage example.

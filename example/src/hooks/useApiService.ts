@@ -88,8 +88,6 @@ const getApiUrlFor = (environment: string, isDataSession: boolean): string => {
   switch (environment) {
     case 'Sandbox':
       return isDataSession ? Config.SAND_API_URL : Config.SAND_CHECKOUT_API_URL;
-    case 'Development':
-      return isDataSession ? Config.DEV_API_URL : Config.DEV_CHECKOUT_API_URL;
     case 'Production':
       return isDataSession ? Config.PROD_API_URL : Config.PROD_CHECKOUT_API_URL;
     default:
@@ -101,8 +99,6 @@ const getApiKeyFor = (environment: string): string => {
   switch (environment) {
     case 'Sandbox':
       return Config.SAND_API_KEY;
-    case 'Development':
-      return Config.DEV_API_KEY;
     case 'Production':
       return Config.PROD_API_KEY;
     default:
