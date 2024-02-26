@@ -1,6 +1,6 @@
 {
   "name": "@getivy/react-native-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Getivy SDK for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
